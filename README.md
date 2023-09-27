@@ -232,3 +232,25 @@ If you lose this file, you lose the state of your infrastructure.
 ### Terraform Directory
 
 `.terraform` contains the binaries of terraform providers.
+
+## Issues with Terraform Cloud Login and Gitpod
+
+Running `terraform login` in GitPod will launch the Lynx browser in your BASH terminal. However because Lynx is a text browser the page does not display properly.
+
+The workaround is to manually generate a token in TF Cloud and create the following file manually:
+
+```sh
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+
+Then open the file to and enter the following code:
+
+```json
+{
+    "credentials": {
+        "app.terraform.io": {
+            "token": "Your TFCloud Token"
+        }
+    }
+}
+```
