@@ -254,3 +254,5 @@ Then open the file to and enter the following code:
     }
 }
 ```
+
+We have automated this workaround with the following bash script [/bin/generate_tfrc_credentials](bin/generate_tfrc_credentials)
