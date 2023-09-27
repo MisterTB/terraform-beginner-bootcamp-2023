@@ -207,6 +207,12 @@ We can output this changeset ie. "plan" to be passed to apply, but you can also 
 This will run a plan and pass the changeset to be executed by terraform. Apply should prompt yes or no.
 To automatically approve a plan, the auto approve flag can be passed. eg. `terraform apply --auto-approve`
 
+#### Terraform Destroy
+
+`terraform destroy`
+
+This will destroy any resources in your terraform.tfstate file. You can also use the `--auto-approve` flag to avoid the confirmation prompt.
+
 ### Terraform Lock Files
 
 `terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
