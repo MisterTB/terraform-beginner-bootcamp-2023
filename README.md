@@ -23,7 +23,7 @@ The Terraform CLI instructions have changed due to GPG keyring changes. Had to e
 
 ### Consideration for Linux Distribution
 
-This project i built against Ubuntu. Please consider checking your Linux Distribution and change accordinlgy to your distribution needs.
+This project is built against Ubuntu. Please consider checking your Linux Distribution and change accordinlgy to your distribution needs.
 
 [How to check OS Vesion on Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
 
@@ -95,18 +95,18 @@ chmod 744 ./bin/install_terraform_cli
 ```
 https://en.wikipedia.org/wiki/Chmod
 
-### GitHub Lifecycle (Befor, Init, Command)
+## GitPod Lifecycle (Before, Init, Command)
 
 We need to be careful when using the Init because it will not rerun if we restart an existing workspace.
 
 https://www.gitpod.io/docs/configure/workspaces/tasks#prebuild-and-new-workspaces
 
-### Working with Env Vars
+## Working with Env Vars
 
-We can list outall Environment Variables (Env Vars) using the `env` command
+We can list out all Environment Variables (Env Vars) using the `env` command
 We can filter specific env vars using grep eg. `env | grep AWS_`
 
-#### Setting and Unsetting Env Vars
+### Setting and Unsetting Env Vars
 
 In the terminal, using `export HELLO='world`
 In the terminal, we can unset using `unset HELLO`
@@ -126,18 +126,18 @@ HELLO=`world`
 echo $HELLO
 ```
 
-## Printing Env Vars
+### Printing Env Vars
 
-We can pring an env var using echo eg. `echo $HELLO`
+We can print an env var using echo eg. `echo $HELLO`
 
-#### Scoping of Env Vars
+### Scoping of Env Vars
 
 When you open up new bash terminals in VSCode it will not be aware of env vars that you have set in another window.
 
 if you want Env Vars to persistent across bash terminals, you need to set env vars in your bash profle. 
 eg `.bash_profile`
 
-#### Persisting Env Vars in Gitpod
+### Persisting Env Vars in Gitpod
 
 We can persist env vars into gitpod by storing them in Gitpod Secrets Storage.
 
@@ -148,7 +148,7 @@ All future workspaces launched will set the env vars for all bash terminals open
 
 You can also set env vars in the `.gitpod.yml` but this can only contain non-sensitive env vars.
 
-### AWS CLI Installation
+## AWS CLI Installation
 
 AWS CLI is installed for this project via a BASH script.
 
@@ -213,13 +213,13 @@ To automatically approve a plan, the auto approve flag can be passed. eg. `terra
 
 This will destroy any resources in your terraform.tfstate file. You can also use the `--auto-approve` flag to avoid the confirmation prompt.
 
-### Terraform Lock Files
+#### Terraform Lock Files
 
 `terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
 
 The terraform lock file **should be committed to your version control system (VCS)** ie. Github
 
-### Terraform State Files
+#### Terraform State Files
 
 `terraform.tfstate` contain information about the current state of your infrastructure.
 
@@ -229,7 +229,7 @@ If you lose this file, you lose the state of your infrastructure.
 
 `.terraform.tfstate.backup` is the previous file state.
 
-### Terraform Directory
+#### Terraform Directory
 
 `.terraform` contains the binaries of terraform providers.
 
