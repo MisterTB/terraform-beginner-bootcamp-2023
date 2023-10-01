@@ -71,3 +71,23 @@ The auto.tfvars is used as a file name extension on varible files that not named
 - Any *.auto.tfvars or *.auto.tfvars.json files, processed in lexical order of their filenames.
 
 - Any -var and -var-file options on the command line, in the order they are provided. (This includes variables set by a Terraform Cloud workspace.)
+
+## Dealing with Configuration Drift
+
+### What happens is the state file is lost?
+
+Losing your statefile will require tearing down your cloud infrastructure manually.
+
+Terraform import can be used but it may not work for all cloud resources. The terraform providers documenation contains information on what resources can be imported.
+
+### Fix Missing Resources with Terraform Import
+
+`terraform import aws_s3_bucket.bucket bucket-name`
+
+[Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
+
+[AWS S3 Bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+
+### Fix Manual Configuration
+
+If a resource is deleted or modified manually. Running `terraform plan` will attempt to put the infrastructure back into the expected state.
