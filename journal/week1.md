@@ -15,6 +15,7 @@ Project_Root
 ├── terraform.tfvars    # the date of varialbes we want to load into our terraform project
 └── README.md           # required for root modules
 ```
+Created tree structure at https://tree.nathanfriend.io/ .
 
 [Standard Module Structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
 
