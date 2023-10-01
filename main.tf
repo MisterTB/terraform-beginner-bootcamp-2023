@@ -1,32 +1,3 @@
-terraform {
-   cloud {
-    organization = "MisterTB"
-
-    workspaces {
-      name = "terra-house-tb"
-    }
-  }
-
-  required_providers {
-    random = {
-      source = "hashicorp/random"
-      version = "3.5.1"
-    }
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.18.1"
-    }
-  }
-}
-
-provider "aws" {
-  # Configuration options
-}
-
-provider "random" {
-  # Configuration options
-}
-
 resource "random_string" "bucket_name" {
   lower            = true
   upper            = false
@@ -38,11 +9,7 @@ resource "random_string" "bucket_name" {
   bucket = random_string.bucket_name.result
 
   tags = {
-    Name        = "My bucket"
-    Environment = "Dev"
+    UserUuid        = var.user_uuid
+    Environment     = "Dev"
   }
-}
-
-output "random_bucket_name"{
-    value = random_string.bucket_name.result
 }
