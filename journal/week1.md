@@ -91,3 +91,42 @@ Terraform import can be used but it may not work for all cloud resources. The te
 ### Fix Manual Configuration
 
 If a resource is deleted or modified manually. Running `terraform plan` will attempt to put the infrastructure back into the expected state.
+
+## Fix using Terraform Refresh
+
+```sh
+terraform apply -refresh-only -auto-approve
+```
+
+## Terraform Modules
+
+### Terraform Module Structure
+
+The recommendation is to place modules in a `modules` directory when locally developing modules.
+
+## Passing Input Variables 
+
+Input variables can be passed to a module.
+
+```tf
+module "terrahouse_aws" {
+ source = "./modules/terrahouse_aws"
+ user_uuid = var.user_uuid
+ bucket_name = var.bucket_name 
+}
+```
+
+### Module Sources
+
+Modules can be sourced from various locations
+- local
+- Github
+- Terraform Registry
+
+```tf
+module "terrahouse_aws" {
+ source = "./modules/terrahouse_aws" 
+}
+```
+
+[Module Documenation](https://developer.hashicorp.com/terraform/language/modules/sources)

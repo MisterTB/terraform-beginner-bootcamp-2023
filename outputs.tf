@@ -1,3 +1,4 @@
-output "bucket_name"{
-    value = aws_s3_bucket.website_bucket.bucket
+output "bucket_name" {
+  description = "Bucket Name for SWA Hosting"
+  value = module.terrahouse_aws.bucket_name
 }
