@@ -291,3 +291,13 @@ resource "aws_instance" "web" {
 ```
 
 [Terraform Provisioners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
+
+## For-Each Expressions
+
+For each allows us to enumerate complex data types. Thi is useful when you are creating multiple cloud resources and you want to reduce the amount of repetitive code
+
+```sh
+[for s in var.list : upper(s)]
+```
+
+[For Each Expressions](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
