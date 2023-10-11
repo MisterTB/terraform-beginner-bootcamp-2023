@@ -11,7 +11,7 @@ resource "aws_cloudfront_origin_access_control" "default" {
 }
 
 locals {
-  s3_origin_id = "myS3Origin"
+  s3_origin_id = "MyS3Origin"
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
@@ -74,9 +74,7 @@ resource "terraform_data" "invalidate_cache" {
     provisioner "local-exec" {
        # https://developer.hashicorp.com/terraform/language/expressions/strings#heredoc-strings
     command = <<COMMAND
-    aws cloudfront create-invalidation \
-    --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} \
-    --paths '/*'
+aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} --paths '/*'
     COMMAND
 
       }
