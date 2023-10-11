@@ -3,22 +3,54 @@ require 'json'
 require 'pry'
 require 'active_model'
 
+# We will mock have a state or database for this development server
+# by setting a glocal variable. You would never use a global variable 
+# in a production server.
 $home = {}
 
+# this is a ruby class that includes validations from
+# ActiveRecord. This will represent our Home resources
+# as ruby object.
 class Home
+  # ActiveModel is part of Ruby on Rails.
+  # Its used as an ORM. It has a module within
+  # ActiveModel that provides validations.
+  # The prod terratowns server is rails and uses very
+  # similar and in most cases identical validation
+  # https://guides.rubyonrails.org/active_model_basics.html
   include ActiveModel::Validations
+
+  # Create some virtual attributes to be stored on this object
+  # This will set a getter and setter
+  # eg.
+  # home = new Home()
+  # home.town = 'hello' #setter
+  # home.town() # getter
   attr_accessor :town, :name, :description, :domain_name, :content_version
 
-  validates :town, presence: true
+  validates :town, presence: true, inclusion: { in: [
+    'melomaniac-mansion',
+    'cooker-cove',
+    'video-valley',
+    'the-nomad-pad',
+    'gamers-grotto'
+  ] }
+  # visible to all users
   validates :name, presence: true
+  # visible to all users
   validates :description, presence: true
+  # we want to lock this down to only be from cloudfront
   validates :domain_name, 
     format: { with: /\.cloudfront\.net\z/, message: "domain must be from .cloudfront.net" }
     # uniqueness: true, 
 
+  # content version has to be an integer
+  # we will make sure it increments in the controller  
   validates :content_version, numericality: { only_integer: true }
 end
 
+# Extending a class from Sinarta::Base to turn this generic class
+# to utilize the sinatra web-framework
 class TerraTownsMockServer < Sinatra::Base
 
   def error code, message
@@ -40,11 +72,11 @@ class TerraTownsMockServer < Sinatra::Base
   end
 
   def x_access_code
-    '9b49b3fb-b8e9-483c-b703-97ba88eef8e0'
+    return '9b49b3fb-b8e9-483c-b703-97ba88eef8e0'
   end
 
   def x_user_uuid
-    'e328f4ab-b99f-421c-84c9-4ccea042c7d1'
+    return 'e328f4ab-b99f-421c-84c9-4ccea042c7d1'
   end
 
   def find_user_by_bearer_token
@@ -185,4 +217,5 @@ class TerraTownsMockServer < Sinatra::Base
   end
 end
 
+# This runs the server
 TerraTownsMockServer.run!
