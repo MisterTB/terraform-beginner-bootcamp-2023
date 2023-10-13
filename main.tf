@@ -15,7 +15,7 @@ terraform {
 }
 
 provider "terratowns" {
-  endpoint = "http://localhost:4567"
+  endpoint = "http://localhost:4567/api"
   user_uuid = "e328f4ab-b99f-421c-84c9-4ccea042c7d1" 
   token = "9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
 }
@@ -28,3 +28,16 @@ provider "terratowns" {
 # content_version = var.content_version
 # assets_path = var.assets_path
 #}
+
+resource "terratowns_home" "home"{
+
+  name = "Terrahouse TB - House of Many styles"
+  description = <<DESCRIPTION
+Terrahouse TB is group of elite specialists from all sides of the kingdom.
+There is no father to our styles. We flow like water and adapt to our surroundings.
+DESCRIPTION
+  #domain name = module.terrahouse_aws.cloudfront_url
+  domain_name = "34sulslzde.cloudfront.net"
+  town = "gamers-grotto"
+  content_version = 1  
+}
