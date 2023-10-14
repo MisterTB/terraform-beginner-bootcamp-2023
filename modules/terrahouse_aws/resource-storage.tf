@@ -23,10 +23,10 @@ resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.website_bucket.bucket
   key    = "index.html"
   #source = "${path.root}/public/index.html"
-  source = var.index_html_filepath
+  source = "${var.public_path}/index.html"
   content_type = "text/html"
 
-  etag = filemd5(var.index_html_filepath)
+  etag = filemd5("${var.public_path}/index.html")
   lifecycle {
     replace_triggered_by = [ terraform_data.content_version.output ]
     ignore_changes = [ etag ]
@@ -34,11 +34,11 @@ resource "aws_s3_object" "index_html" {
 }
 
 resource "aws_s3_object" "upload_assests" {
-  for_each = fileset(var.assets_path,"*.{jpg,png,gif,jpeg}")
+  for_each = fileset("${var.public_path}/assets","*.{jpg,png,gif,jpeg}")
    bucket = aws_s3_bucket.website_bucket.bucket
    key    = "assets/${each.key}"
-   source = "${var.assets_path}/${each.key}"
-   etag = filemd5("${var.assets_path}/${each.key}")
+   source = "${var.public_path}/assets/${each.key}"
+   etag = filemd5("${var.public_path}/assets/${each.key}")
   lifecycle {
     replace_triggered_by = [ terraform_data.content_version.output ]
     ignore_changes = [ etag ]
@@ -48,10 +48,10 @@ resource "aws_s3_object" "upload_assests" {
 resource "aws_s3_object" "error_html" {
   bucket = aws_s3_bucket.website_bucket.bucket
   key    = "error.html"
-  source = var.error_html_filepath
+  source = "${var.public_path}/error.html"
   content_type = "text/html"
   
-  etag  = filemd5(var.error_html_filepath)
+  etag  = filemd5("${var.public_path}/error.html")
 }
 
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
